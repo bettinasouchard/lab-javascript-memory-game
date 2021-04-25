@@ -1,9 +1,41 @@
-class MemoryGame {
-  constructor(cards){
+export class MemoryGame {
+  constructor(cards) {
     this.cards = cards;
     // add the rest of the class properties here
+    this.pickedCards = [];
+    this.pairsClicked = 0;
+    this.pairsGuessed = 0;
   }
-  shuffleCards() {}
-  checkIfPair(card1, card2) {}
-  isFinished() {}
+  shuffleCards(cards) {
+    let counter = this.cards.length;
+    while (counter > 0) {
+      // Pick a random index
+      let index = Math.floor(Math.random() * counter);
+      counter--;
+      // And swap the last element with it
+      let temp = this.cards[counter];
+      this.cards[counter] = this.cards[index];
+      this.cards[index] = temp;
+    }
+    return cards;
+  }
+
+  checkIfPair(card1, card2) {
+    this.pairsClicked += 1;
+    if (card1 === card2) {
+      this.pairsGuessed += 1;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isFinished() {
+    //why not this.pairsGuessed === 12 ? is it for it to work with any number of cards ?
+    if (this.pairsGuessed === this.cards.length/2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

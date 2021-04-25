@@ -1,3 +1,5 @@
+import { MemoryGame } from "./memory.js";
+
 const cards = [
   { name: 'aquaman', img: 'aquaman.jpg' },
   { name: 'batman', img: 'batman.jpg' },
@@ -40,10 +42,23 @@ window.addEventListener('load', event => {
   document.querySelector('#memory-board').innerHTML = html;
 
   // Bind the click event of each element to a function
+  // Option 1: on click, add the class turned next to the class card 
+  // to the div that represents each card - like in the following example:
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
-      // TODO: write some code here
+      //card.classList.toggle("turned", true);
+  
+      if (card.classList) {
+        card.classList.add('turned');
+        checkIfPair(card1, card2);
+      }
+      else {
+        card.classList.remove('turned');
+      }
       console.log(`Card clicked: ${card}`);
     });
   });
 });
+
+
+
